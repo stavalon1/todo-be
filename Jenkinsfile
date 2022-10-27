@@ -1,10 +1,6 @@
 currentBuild.displayName = "todo-app-be-#"+currentBuild.number
 pipeline {
     agent any
-    
-   // environment {
-       // TAG = currentBuild.number
-   // }
 
     stages {
         stage('Build stage') {
