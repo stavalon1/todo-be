@@ -1,16 +1,16 @@
-currentBuild.displayName = "todo-app-#"+currentBuild.number
+currentBuild.displayName = "todo-app-be-#"+currentBuild.number
 pipeline {
     agent any
 
     stages {
         stage('Build stage') {
             steps {
-              sh 'DOCKER_BUILDKIT=1 docker build -t firestore/todo-be:latest --target builder .'
+              sh 'DOCKER_BUILDKIT=1 docker build -f Dockerfile-pipelines -t firestore/todo-be:latest --target builder .'
             }
         }
         stage('Delivery stage') {
             steps {
-                sh 'DOCKER_BUILDKIT=1 docker build -t firestore/todo-be:latest --target delivery .'
+                sh 'DOCKER_BUILDKIT=1 docker build -f Dockerfile-pipelines -t firestore/todo-be:latest --target delivery .'
             }
         }
     }
