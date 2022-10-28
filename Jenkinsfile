@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Delivery stage') {
             steps {
-                sh 'DOCKER_BUILDKIT=1 docker build -f Dockerfile-pipelines -t firestore/todo-be:$BUILD_NUMBER --target delivery .'
+                sh 'DOCKER_BUILDKIT=1 docker build -f Dockerfile-pipelines -t firestore/todo-be:jenkins-$BUILD_NUMBER --target delivery .'
             }
         }
         stage('Push Artifact') {
@@ -18,7 +18,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerPwd')]) {
                 sh "docker login -u firestore -p ${dockerPwd}"
         }
-                sh "docker push firestore/todo-be:$BUILD_NUMBER"
+                sh "docker push firestore/todo-be:jenkins-$BUILD_NUMBER"
             }
         }
     }
